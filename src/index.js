@@ -1,4 +1,5 @@
 import express from 'express';
+import '@babel/polyfill';
 import { config } from 'dotenv';
 import morgan from 'morgan';
 import cors from 'cors';

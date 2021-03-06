@@ -10,7 +10,9 @@
     "build": "babel ./src --out-dir build",
     "migrate:undo": "npx sequelize db:migrate:undo",
     "seed": "npm run migrate:undo && npm run migrate && npx sequelize db:seed:undo:all && npx sequelize db:seed:all",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha  --timeout 10000000 ./src/tests/**.test.js --require @babel/register --exit",
+    "cover": "nyc --reporter=html --reporter=text npm test"
+
   },
   "repository": {
     "type": "git",
@@ -39,6 +41,7 @@
     "joi": "^17.4.0",
     "mocha": "^8.3.1",
     "morgan": "^1.10.0",
+    "nyc": "^15.1.0",
     "pg": "^8.5.1",
     "pg-hstore": "^2.3.3",
     "sequelize": "^6.5.0",
