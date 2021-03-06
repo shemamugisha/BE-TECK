@@ -1,0 +1,52 @@
+{
+  "name": "ziptech-backend",
+  "version": "1.0.0",
+  "description": "backend rest api of zipTech",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx nodemon --exec babel-node src",
+    "migrate": "sequelize db:migrate",
+    "migrate:undo": "npx sequelize db:migrate:undo",
+    "seed": "npm run migrate:undo && npm run migrate && npx sequelize db:seed:undo:all && npx sequelize db:seed:all",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShemaM/ZipTech-backend.git"
+  },
+  "author": "Shema Christian",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ShemaM/ZipTech-backend/issues"
+  },
+  "homepage": "https://github.com/ShemaM/ZipTech-backend#readme",
+  "dependencies": {
+    "@babel/cli": "^7.13.0",
+    "@babel/core": "^7.13.8",
+    "@babel/node": "^7.13.0",
+    "@babel/polyfill": "^7.12.1",
+    "@babel/preset-env": "^7.13.9",
+    "@babel/register": "^7.13.8",
+    "chai": "^4.3.3",
+    "chai-http": "^4.3.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
+    "helmet": "^4.4.1",
+    "joi": "^17.4.0",
+    "mocha": "^8.3.1",
+    "morgan": "^1.10.0",
+    "pg": "^8.5.1",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.5.0",
+    "sequelize-cli": "^6.2.0",
+    "swagger-jsdoc": "^7.0.0-rc.4",
+    "swagger-ui-express": "^4.1.6"
+  },
+  "devDependencies": {
+    "eslint": "^7.21.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1"
+  }
+}
