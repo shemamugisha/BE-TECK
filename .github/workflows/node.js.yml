@@ -46,5 +46,5 @@ jobs:
           TEST_DATABASE_URL: ${{ secrets.TEST_DATABASE_URL }}
           EMAIL: ${{ secrets.EMAIL }}
           PASS: ${{ secrets.PASS }}
-          JWT_KEY: ${{ secrets.JWT }}
+          JWT: ${{ secrets.JWT }}
           PORT: ${{ secrets.PORT }}

@@ -1,7 +1,9 @@
-import asyncHandler from 'express-async-handler';
+import successRes from '../utils/successHandler';
 
-export default asyncHandler((req, res) => {
-  res.json({
-    message: 'Welcome to ZipTech Api',
-  });
-});
+class Welcome {
+  static async get(req, res) {
+    return successRes(res, 200, 'Welcome to ZipTech Api');
+  }
+}
+
+export default Welcome;
