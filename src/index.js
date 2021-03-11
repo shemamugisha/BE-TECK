@@ -4,7 +4,7 @@ import { config } from 'dotenv';
 import morgan from 'morgan';
 import cors from 'cors';
 import routes from './routes/index';
-import { notFound, errorHandler } from './middlewares/errorMiddlewareHandler';
+import errorRes from './utils/errorHandler';
 
 config();
 const { PORT } = process.env;
@@ -15,9 +15,10 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(cors());
 
-app.use('/api/v1', routes);
-app.use(notFound);
-app.use(errorHandler);
+app.use('/', routes);
+app.use('*', (req, res) => {
+  errorRes(res, 404, `Not Found - ${req.originalUrl}`);
+});
 
 app.listen(PORT, console.log(`Server is running at ${PORT} `));
 

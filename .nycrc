@@ -1,0 +1,1 @@
+{  "all": true,  "include": [    "src/*/**.js"  ],  "exclude": [ "src/database" ]}

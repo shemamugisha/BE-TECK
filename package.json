@@ -11,7 +11,10 @@
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "migrate:undo": "npx sequelize db:migrate:undo",
     "seed": "npm run migrate:undo && npm run migrate && npx sequelize db:seed:undo:all && npx sequelize db:seed:all",
-    "test": "mocha  --timeout 10000000 ./src/tests/**.test.js --require @babel/register --exit",
+    "seed:test":"NODE_ENV=test npm run seed",
+    "test": "npm run drop:db && npm run create:db && npm run seed:test && NODE_ENV=test mocha  --timeout 1000000  ./src/tests/**.test.js --require @babel/register --exit",
+    "create:db": "NODE_ENV=test sequelize db:create",
+    "drop:db": "NODE_ENV=test sequelize db:drop",
     "cover": "nyc  npm run test"
   },
   "repository": {
@@ -31,6 +34,7 @@
     "@babel/polyfill": "^7.12.1",
     "@babel/preset-env": "^7.13.9",
     "@babel/register": "^7.13.8",
+    "bcryptjs": "^2.4.3",
     "chai": "^4.3.3",
     "chai-http": "^4.3.0",
     "cors": "^2.8.5",
@@ -40,6 +44,7 @@
     "express-async-handler": "^1.1.4",
     "helmet": "^4.4.1",
     "joi": "^17.4.0",
+    "jsonwebtoken": "^8.5.1",
     "mocha": "^8.3.1",
     "morgan": "^1.10.0",
     "nyc": "^15.1.0",
