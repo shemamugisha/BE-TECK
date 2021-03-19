@@ -18,7 +18,6 @@ export const signupValidation = (req, res, next) => {
 export const signinValidation = (req, res, next) => {
   const schema = Joi.object({
     email: Joi.string()
-      .required()
       .email({ tlds: { allow: false } })
       .required(),
     password: Joi.string()

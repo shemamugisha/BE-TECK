@@ -11,3 +11,10 @@ export const findUser = async (param) => {
   const user = await User.findOne({ where: param });
   return user;
 };
+
+export const updateUser = async (user, param) => {
+  const updatedUser = await User.update(user, {
+    where: param,
+  });
+  return updatedUser;
+};
