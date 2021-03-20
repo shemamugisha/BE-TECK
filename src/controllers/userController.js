@@ -1,7 +1,13 @@
+import 'dotenv/config';
 import { findUser, createUser, updateUser } from '../services/userServices';
 import successRes from '../utils/successHandler';
 import errorRes from '../utils/errorHandler';
-import { encryptPassword, decryptPassword, signToken } from '../utils/auth';
+import {
+  encryptPassword,
+  decryptPassword,
+  signToken,
+  verifyToken,
+} from '../utils/auth';
 import sendEmail from '../utils/mail';
 
 class userController {
@@ -47,15 +53,14 @@ class userController {
   }
 
   static async forgortPassword(req, res) {
+    const { HOST } = process.env;
+
     try {
-      const { HOST } = process.env;
       const user = await findUser({ email: req.body.email });
       if (!user) {
         return errorRes(res, 401, 'Email not found');
       }
       const token = signToken({ email: user.email, id: user.id });
-
-      console.log('hellllooooooooo', token);
 
       await sendEmail('forgotPassword', {
         email: user.email,
@@ -66,36 +71,32 @@ class userController {
         res,
         200,
         'check your email',
-        `${HOST}/api/users/reset/${token}`,
+        `${HOST}/user/reset/${token}`,
       );
     } catch (error) {
-      return errorRes(res, 500, 'error while requesting');
+      return errorRes(res, 500, 'Error while requesting for reset password');
     }
   }
 
   static async resetPassword(req, res) {
+    const { newPassword, rePassword } = req.body;
     try {
-      const { email } = req.params;
-      const foundUser = await _user.findOne({ where: { email } });
-      const password = await encryptPassword(req.body.password);
-      const { email: useremail } = verifyLink(
-        req.params.token,
-        foundUser.password,
-      );
-      if (!useremail) {
-        return res.status(404).json({ message: 'user not email not found' });
+      const userDetails = verifyToken(req.params.token);
+
+      const user = await findUser({ email: userDetails.email });
+      if (!user) return errorRes(res, 403, 'Not user found ');
+
+      if (newPassword !== rePassword) {
+        return errorRes(res, 400, 'Password does not match!');
       }
 
-      await _user.update({ password }, { where: { email: useremail } });
+      const pass = await encryptPassword(newPassword);
 
-      return successRes(
-        res,
-        201,
-        'Thank you! You can now use your new password to login!',
-        updatePassword,
-      );
+      const update = await updateUser({ password: pass }, { id: user.id });
+
+      return successRes(res, 201, 'Password Updated Successfully', update);
     } catch (error) {
-      console.log('xxxxxxxxx', error);
+      console.log(error);
       return errorRes(res, 500, 'There was an error while reseting password');
     }
   }

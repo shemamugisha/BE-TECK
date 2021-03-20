@@ -8,6 +8,7 @@ export const encryptPassword = async (password) => {
   const hashed = await hash(password, 10);
   return hashed;
 };
+
 export const decryptPassword = async (password, hashed) => {
   const isValid = await compare(password, hashed);
   return isValid;

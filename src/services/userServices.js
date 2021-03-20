@@ -14,7 +14,7 @@ export const findUser = async (param) => {
 
 export const updateUser = async (user, param) => {
   const updatedUser = await User.update(user, {
-    where: param,
+    where: [param],
   });
   return updatedUser;
 };

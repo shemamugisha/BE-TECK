@@ -59,7 +59,6 @@ const sendEmail = async (type, data = {}) => {
       default:
         mailOptions.html = '';
     }
-    console.log(email);
     const info = await transporter.sendMail(mailOptions);
     console.log('Preview URL:', nodemailer.getTestMessageUrl(info));
   } catch (error) {
