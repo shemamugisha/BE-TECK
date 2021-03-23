@@ -1,6 +1,6 @@
-export default (res, status, messsage) => {
+export default (res, status, message) => {
   res.status(status).json({
-    messsage,
+    message,
     success: false,
   });
 };

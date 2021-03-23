@@ -16,7 +16,7 @@ describe('Testing Server', () => {
   });
 
   it('Testing unknown endPoint', async () => {
-    const res = await chai.request(server).get('/unknowq');
+    const res = await chai.request(server).get('/unknow');
     expect(res.status).to.be.equal(404);
     expect(res.body).to.have.property('success', false);
   });
