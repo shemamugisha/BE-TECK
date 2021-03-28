@@ -11,9 +11,6 @@ module.exports = {
       name: {
         type: Sequelize.STRING,
       },
-      image: {
-        type: Sequelize.STRING,
-      },
       brand: {
         type: Sequelize.STRING,
       },
@@ -21,6 +18,12 @@ module.exports = {
         type: Sequelize.STRING,
       },
       category: {
+        type: Sequelize.STRING,
+      },
+      imageUrl: {
+        type: Sequelize.STRING,
+      },
+      imageId: {
         type: Sequelize.STRING,
       },
       createdAt: {
