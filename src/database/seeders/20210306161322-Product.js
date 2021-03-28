@@ -7,7 +7,6 @@ module.exports = {
       [
         {
           name: 'Iphone 12',
-          image: '',
           brand: 'apple',
           description: '8GB-RAM 64GB-MEMORY',
           category: 'phones',
