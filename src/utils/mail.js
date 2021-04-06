@@ -5,6 +5,8 @@ import { signToken } from './auth';
 
 const { EMAIL, PASS, HOST } = process.env;
 
+console.log('^^^^^^^^^^^^^^^^^^^', PASS, EMAIL);
+
 const sendEmail = async (type, data = {}) => {
   try {
     const mailGenerator = new Mailgen({
@@ -60,25 +62,25 @@ const sendEmail = async (type, data = {}) => {
         mailOptions.html = '';
     }
 
-    switch (type) {
-      case 'subscribe':
-        email = {
-          body: {
-            intro: 'Dear customer welcome to ziptech',
-            action: {
-              instructions:
-                'Please click the button below to see the new product',
-              button: {
-                color: '#008c52',
-                text: 'New Product',
-              },
-            },
-          },
-        };
-        break;
-      default:
-        mailOptions.html = '';
-    }
+    // switch (type) {
+    //   case 'subscribe':
+    //     email = {
+    //       body: {
+    //         intro: 'Dear customer welcome to ziptech',
+    //         action: {
+    //           instructions:
+    //             'Please click the button below to see the new product',
+    //           button: {
+    //             color: '#008c52',
+    //             text: 'New Product',
+    //           },
+    //         },
+    //       },
+    //     };
+    //     break;
+    //   default:
+    //     mailOptions.html = '';
+    // }
     const info = await transporter.sendMail(mailOptions);
     console.log('Preview URL:', nodemailer.getTestMessageUrl(info));
   } catch (error) {

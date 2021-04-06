@@ -67,12 +67,7 @@ class userController {
         id: user.id,
         token,
       });
-      return successRes(
-        res,
-        200,
-        'check your email',
-        `${HOST}/user/reset/${token}`,
-      );
+      return successRes(res, 200, 'check your email', `${HOST}/reset/${token}`);
     } catch (error) {
       return errorRes(res, 500, 'Error while requesting for reset password');
     }
@@ -96,10 +91,8 @@ class userController {
 
       return successRes(res, 201, 'Password Updated Successfully', update);
     } catch (error) {
-      console.log(error);
       return errorRes(res, 500, 'There was an error while reseting password');
     }
   }
 }
-
 export default userController;
