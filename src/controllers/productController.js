@@ -49,6 +49,7 @@ class Product {
       const product = await findAll();
       return successRes(res, 200, 'Successfully fetched all products', product);
     } catch (error) {
+      console.log(error);
       return errorRes(res, 500, 'There was an error while fetching products');
     }
   }
